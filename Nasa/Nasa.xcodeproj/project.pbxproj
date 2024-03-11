@@ -39,6 +39,7 @@
 		96FA49762B9E608300C61385 /* PreaLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA49752B9E608300C61385 /* PreaLoaderView.swift */; };
 		96FA49792B9E60AD00C61385 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 96FA49782B9E60AD00C61385 /* Lottie */; };
 		96FA497C2B9E648E00C61385 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA497B2B9E648E00C61385 /* Extension.swift */; };
+		96FA497E2B9E758200C61385 /* FullImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA497D2B9E758200C61385 /* FullImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		96FA49732B9E606800C61385 /* LottieAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LottieAnimation.json; sourceTree = "<group>"; };
 		96FA49752B9E608300C61385 /* PreaLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreaLoaderView.swift; sourceTree = "<group>"; };
 		96FA497B2B9E648E00C61385 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		96FA497D2B9E758200C61385 /* FullImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 			children = (
 				967BF3592B9B402400A02AA3 /* Components */,
 				96FA49752B9E608300C61385 /* PreaLoaderView.swift */,
+				96FA497D2B9E758200C61385 /* FullImageView.swift */,
 				967BF3572B9B332800A02AA3 /* HomeView.swift */,
 				3254C74B2B9E285E00AA89FB /* HistoryView.swift */,
 			);
@@ -336,6 +339,7 @@
 				967BF3AE2B9CB66E00A02AA3 /* EnvironmentValues+ImageCache.swift in Sources */,
 				3254C74C2B9E285E00AA89FB /* HistoryView.swift in Sources */,
 				967BF3912B9BC15200A02AA3 /* Photo.swift in Sources */,
+				96FA497E2B9E758200C61385 /* FullImageView.swift in Sources */,
 				967BF3942B9BC1B200A02AA3 /* APIClient.swift in Sources */,
 				967BF38B2B9BC10A00A02AA3 /* Mission.swift in Sources */,
 				3254C74F2B9E2B0500AA89FB /* History.xcdatamodeld in Sources */,

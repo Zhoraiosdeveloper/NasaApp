@@ -37,6 +37,8 @@ struct HomeView: View {
                                                          cameraName: "\(photo.camera.fullName)",
                                                          date: "\(photo.earthDate.DateToString())",
                                                          imageURL: "\(photo.imgSrc)")
+                                            NavigationLink(destination: FullImageView(imageURL: "\(photo.imgSrc)")) {
+                                            }
                                         }
                                     }
                                     .listRowBackground(Color.backgroundOne)
