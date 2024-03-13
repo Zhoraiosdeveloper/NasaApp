@@ -30,7 +30,6 @@
 		967BF3942B9BC1B200A02AA3 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967BF3932B9BC1B200A02AA3 /* APIClient.swift */; };
 		967BF3962B9BC1E000A02AA3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967BF3952B9BC1E000A02AA3 /* NetworkManager.swift */; };
 		967BF3982B9BC20200A02AA3 /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967BF3972B9BC20200A02AA3 /* NetworkManagerProtocol.swift */; };
-		967BF39B2B9BC76400A02AA3 /* DataPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967BF39A2B9BC76400A02AA3 /* DataPicker.swift */; };
 		967BF3AC2B9CB63800A02AA3 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967BF3AB2B9CB63800A02AA3 /* AsyncImage.swift */; };
 		967BF3AE2B9CB66E00A02AA3 /* EnvironmentValues+ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967BF3AD2B9CB66E00A02AA3 /* EnvironmentValues+ImageCache.swift */; };
 		967BF3B02B9CB69100A02AA3 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967BF3AF2B9CB69100A02AA3 /* ImageCache.swift */; };
@@ -40,6 +39,11 @@
 		96FA49792B9E60AD00C61385 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 96FA49782B9E60AD00C61385 /* Lottie */; };
 		96FA497C2B9E648E00C61385 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA497B2B9E648E00C61385 /* Extension.swift */; };
 		96FA497E2B9E758200C61385 /* FullImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA497D2B9E758200C61385 /* FullImageView.swift */; };
+		96FA49862BA110EA00C61385 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA49852BA110EA00C61385 /* LottieView.swift */; };
+		96FA498A2BA112A200C61385 /* APIEndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA49892BA112A200C61385 /* APIEndPoints.swift */; };
+		96FA498C2BA112E700C61385 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA498B2BA112E700C61385 /* Constant.swift */; };
+		96FA498E2BA1145600C61385 /* MakeAURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA498D2BA1145600C61385 /* MakeAURL.swift */; };
+		96FA49992BA1479100C61385 /* CustomAlert in Frameworks */ = {isa = PBXBuildFile; productRef = 96FA49982BA1479100C61385 /* CustomAlert */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,7 +71,6 @@
 		967BF3932B9BC1B200A02AA3 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		967BF3952B9BC1E000A02AA3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		967BF3972B9BC20200A02AA3 /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
-		967BF39A2B9BC76400A02AA3 /* DataPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPicker.swift; sourceTree = "<group>"; };
 		967BF3AB2B9CB63800A02AA3 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		967BF3AD2B9CB66E00A02AA3 /* EnvironmentValues+ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+ImageCache.swift"; sourceTree = "<group>"; };
 		967BF3AF2B9CB69100A02AA3 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
@@ -76,6 +79,10 @@
 		96FA49752B9E608300C61385 /* PreaLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreaLoaderView.swift; sourceTree = "<group>"; };
 		96FA497B2B9E648E00C61385 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		96FA497D2B9E758200C61385 /* FullImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageView.swift; sourceTree = "<group>"; };
+		96FA49852BA110EA00C61385 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		96FA49892BA112A200C61385 /* APIEndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndPoints.swift; sourceTree = "<group>"; };
+		96FA498B2BA112E700C61385 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		96FA498D2BA1145600C61385 /* MakeAURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeAURL.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96FA49992BA1479100C61385 /* CustomAlert in Frameworks */,
 				96FA49792B9E60AD00C61385 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -160,6 +168,7 @@
 			children = (
 				967BF3592B9B402400A02AA3 /* Components */,
 				96FA49752B9E608300C61385 /* PreaLoaderView.swift */,
+				96FA49852BA110EA00C61385 /* LottieView.swift */,
 				96FA497D2B9E758200C61385 /* FullImageView.swift */,
 				967BF3572B9B332800A02AA3 /* HomeView.swift */,
 				3254C74B2B9E285E00AA89FB /* HistoryView.swift */,
@@ -179,7 +188,6 @@
 			isa = PBXGroup;
 			children = (
 				96FA49722B9E606000C61385 /* Animation */,
-				967BF3992B9BC75600A02AA3 /* Pickers */,
 				967BF35A2B9B402B00A02AA3 /* Buttons */,
 				967BF35F2B9B49A500A02AA3 /* List */,
 			);
@@ -218,16 +226,11 @@
 				967BF3932B9BC1B200A02AA3 /* APIClient.swift */,
 				967BF3952B9BC1E000A02AA3 /* NetworkManager.swift */,
 				967BF3972B9BC20200A02AA3 /* NetworkManagerProtocol.swift */,
+				96FA49892BA112A200C61385 /* APIEndPoints.swift */,
+				96FA498B2BA112E700C61385 /* Constant.swift */,
+				96FA498D2BA1145600C61385 /* MakeAURL.swift */,
 			);
 			path = Networking;
-			sourceTree = "<group>";
-		};
-		967BF3992B9BC75600A02AA3 /* Pickers */ = {
-			isa = PBXGroup;
-			children = (
-				967BF39A2B9BC76400A02AA3 /* DataPicker.swift */,
-			);
-			path = Pickers;
 			sourceTree = "<group>";
 		};
 		967BF3AA2B9CB60F00A02AA3 /* ThirdPartyUtils */ = {
@@ -275,6 +278,7 @@
 			name = Nasa;
 			packageProductDependencies = (
 				96FA49782B9E60AD00C61385 /* Lottie */,
+				96FA49982BA1479100C61385 /* CustomAlert */,
 			);
 			productName = Nasa;
 			productReference = 967BF33F2B9B097E00A02AA3 /* Nasa.app */;
@@ -306,6 +310,7 @@
 			mainGroup = 967BF3362B9B097E00A02AA3;
 			packageReferences = (
 				96FA49772B9E60AC00C61385 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				96FA49972BA1479100C61385 /* XCRemoteSwiftPackageReference "CustomAlert" */,
 			);
 			productRefGroup = 967BF3402B9B097E00A02AA3 /* Products */;
 			projectDirPath = "";
@@ -341,16 +346,19 @@
 				967BF3912B9BC15200A02AA3 /* Photo.swift in Sources */,
 				96FA497E2B9E758200C61385 /* FullImageView.swift in Sources */,
 				967BF3942B9BC1B200A02AA3 /* APIClient.swift in Sources */,
+				96FA498A2BA112A200C61385 /* APIEndPoints.swift in Sources */,
 				967BF38B2B9BC10A00A02AA3 /* Mission.swift in Sources */,
 				3254C74F2B9E2B0500AA89FB /* History.xcdatamodeld in Sources */,
 				967BF3872B9BBD5000A02AA3 /* Rover.swift in Sources */,
 				96FA49762B9E608300C61385 /* PreaLoaderView.swift in Sources */,
-				967BF39B2B9BC76400A02AA3 /* DataPicker.swift in Sources */,
 				967BF3742B9B554300A02AA3 /* SF-Pro-Display-Bold.otf in Sources */,
+				96FA49862BA110EA00C61385 /* LottieView.swift in Sources */,
 				967BF38F2B9BC13D00A02AA3 /* PhotoList.swift in Sources */,
 				967BF3852B9BB54F00A02AA3 /* HomeViewModel.swift in Sources */,
 				967BF3582B9B332800A02AA3 /* HomeView.swift in Sources */,
 				967BF3892B9BBD6D00A02AA3 /* CameraIdentifier.swift in Sources */,
+				96FA498E2BA1145600C61385 /* MakeAURL.swift in Sources */,
+				96FA498C2BA112E700C61385 /* Constant.swift in Sources */,
 				967BF38D2B9BC11E00A02AA3 /* PhotoManifest.swift in Sources */,
 				3254C75C2B9E2C8000AA89FB /* Persistence.swift in Sources */,
 				967BF3432B9B097E00A02AA3 /* NasaApp.swift in Sources */,
@@ -601,6 +609,14 @@
 				minimumVersion = 4.4.1;
 			};
 		};
+		96FA49972BA1479100C61385 /* XCRemoteSwiftPackageReference "CustomAlert" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/divadretlaw/CustomAlert.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -608,6 +624,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 96FA49772B9E60AC00C61385 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		96FA49982BA1479100C61385 /* CustomAlert */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 96FA49972BA1479100C61385 /* XCRemoteSwiftPackageReference "CustomAlert" */;
+			productName = CustomAlert;
 		};
 /* End XCSwiftPackageProductDependency section */
 

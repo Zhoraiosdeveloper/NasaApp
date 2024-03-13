@@ -7,9 +7,10 @@
 
 import Foundation
 
-final class NetworkManager : NetworkManagerProtocol{
+final class NetworkManager : NetworkManagerProtocol {
+    
     func fetchMission(for rover: Rover, completionHandler: @escaping (Mission) -> Void) {
-        var endpoint: APIClient.Endpoint
+        var endpoint: Endpoint
         switch rover {
         case .curiosity:
             endpoint = .curiosityManifest
@@ -19,7 +20,7 @@ final class NetworkManager : NetworkManagerProtocol{
             endpoint = .spiritManifest
         }
         
-        APIClient.shared.GET(endpoint: endpoint, params: nil) { (result: Result<Mission, APIClient.APIError>) in
+        APIClient.shared.GET(endpoint: endpoint, params: nil) { (result: Result<Mission, APIError>) in
             switch result {
             case let .success(response):
                 completionHandler(response)
@@ -30,7 +31,7 @@ final class NetworkManager : NetworkManagerProtocol{
     }
     
     func fetchPhotoList(for rover: Rover, on date: Date, completionHandler: @escaping (PhotoList) -> Void) {
-        var endpoint: APIClient.Endpoint
+        var endpoint: Endpoint
         switch rover {
         case .curiosity:
             endpoint = .curiosityPhotos
@@ -45,7 +46,7 @@ final class NetworkManager : NetworkManagerProtocol{
         
         let dateString = dateFormatter.string(from: date)
         
-        APIClient.shared.GET(endpoint: endpoint, params: ["earth_date": dateString]) { (result: Result<PhotoList, APIClient.APIError>) in
+        APIClient.shared.GET(endpoint: endpoint, params: ["earth_date": dateString]) { (result: Result<PhotoList, APIError>) in
             switch result {
             case let .success(response):
                 completionHandler(response)
@@ -55,9 +56,8 @@ final class NetworkManager : NetworkManagerProtocol{
         }
     }
     
-    
     func fetchPhotoLists(for rover: Rover ,on param: [String:String], completionHandler: @escaping (PhotoList) -> Void) {
-        var endpoint: APIClient.Endpoint
+        var endpoint: Endpoint
         switch rover {
         case .curiosity:
             endpoint = .curiosityPhotos
@@ -67,7 +67,7 @@ final class NetworkManager : NetworkManagerProtocol{
             endpoint = .spiritPhotos
         }
                 
-        APIClient.shared.GET(endpoint: endpoint, params: param) { (result: Result<PhotoList, APIClient.APIError>) in
+        APIClient.shared.GET(endpoint: endpoint, params: param) { (result: Result<PhotoList, APIError>) in
             switch result {
             case let .success(response):
                 completionHandler(response)
@@ -76,6 +76,4 @@ final class NetworkManager : NetworkManagerProtocol{
             }
         }
     }
-    
-   
 }

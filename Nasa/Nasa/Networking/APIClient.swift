@@ -11,46 +11,16 @@ import Foundation
 
 final class APIClient {
     
-    let apiKey = "6MjIrngMJQ9xfuT49tye2Rew1sz4SR3QFIBWfSfY"
-    
     static let shared = APIClient()
     
-    let baseURL = URL(string: "https://api.nasa.gov/mars-photos/api/v1/")!
     let decoder = JSONDecoder()
-    
-    enum APIError: Error {
-        case noResponse
-        case jsonDecodingError(error: Error)
-        case networkError(error: Error)
-    }
-    
-    enum Endpoint {
-        case curiosityPhotos, opportunityPhotos, spiritPhotos
-        case curiosityManifest, opportunityManifest, spiritManifest
-        
-        func path() -> String {
-            switch self {
-            case .curiosityManifest:
-                return "manifests/curiosity"
-            case .opportunityManifest:
-                return "manifests/opportunity"
-            case .spiritManifest:
-                return "manifests/spirit"
-            case .curiosityPhotos:
-                return "rovers/curiosity/photos"
-            case .opportunityPhotos:
-                return "rovers/opportunity/photos"
-            case .spiritPhotos:
-                return "rovers/spirit/photos"
-            }
-        }
-    }
+    var makeURLFunc = MakeAURL()
     
     func GET<T: Decodable>(endpoint: Endpoint,
                            params: [String: String]?,
                            completionHandler: @escaping (Result<T, APIError>) -> Void) {
-        let url = makeURL(endpoint: endpoint, params: params)
         
+        let url = makeURLFunc.makeURL(endpoint: endpoint, params: params)
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
@@ -83,24 +53,6 @@ final class APIClient {
                 }
             }
         }
-        
         task.resume()
-    }
-    
-    private func makeURL(endpoint: Endpoint, params: [String: String]?) -> URL {
-        let queryURL = baseURL.appendingPathComponent(endpoint.path())
-        
-        var components = URLComponents(url: queryURL, resolvingAgainstBaseURL: true)!
-        components.queryItems = [
-            URLQueryItem(name: "api_key", value: apiKey)
-        ]
-        
-        if let params = params {
-            for (_, value) in params.enumerated() {
-                components.queryItems?.append(URLQueryItem(name: value.key, value: value.value))
-            }
-        }
-        
-        return components.url!
     }
 }

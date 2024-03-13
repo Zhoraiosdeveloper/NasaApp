@@ -13,7 +13,7 @@ final class HomeViewModel: ObservableObject {
     
     @Published var missions: [Rover: Mission] = [:]
     @Published var photos = [Photo] ()
-    @Published var apiCalled = false 
+    @Published var apiCalled = false
     @Published var apiResponse = false
     @Published var useFilter = false
     
@@ -36,7 +36,7 @@ final class HomeViewModel: ObservableObject {
     }
     
     @Published var selectedCamera: CameraIdentifier   = .fhaz
-     @Published var dateRange:        ClosedRange<Date>  = Date()...Date()
+    @Published var dateRange:        ClosedRange<Date>  = Date()...Date()
     @Published var availableCameras: [CameraIdentifier] = [.fhaz]
     
     init(networkManager: NetworkManagerProtocol) {
@@ -61,23 +61,20 @@ final class HomeViewModel: ObservableObject {
     func getPhotosList(type:Rover,param:[String:String])  {
         apiCalled  = true
         apiResponse = false
-        isShowingDatePicker = false 
+        isShowingDatePicker = false
         networkManager.fetchPhotoLists(for: type, on: param) { photos in
             
             self.photos = photos.photos
-            self.apiCalled  = false 
+            self.apiCalled  = false
             
             if photos.photos.isEmpty {
                 self.apiResponse = true
             }else {
                 self.apiResponse = false
             }
-                
-            
         }
     }
-
- 
+    
     private func getDateRange() -> ClosedRange<Date> {
         guard let startDate = missions[selectedRover]?.photoManifest.landingDate,
               let endDate   = missions[selectedRover]?.photoManifest.maxDate
@@ -85,7 +82,6 @@ final class HomeViewModel: ObservableObject {
             print("Unable to get date range from photo manifest.")
             return Date()...Date()
         }
-        
         return startDate...endDate
     }
     
@@ -108,10 +104,5 @@ final class HomeViewModel: ObservableObject {
         selectedCamera = .none
         return [.none]
     }
-    
 }
 
-
-
-
-var caseType : CameraIdentifier = .fhaz

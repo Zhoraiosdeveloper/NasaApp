@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CustomAlert
 
 struct HomeView: View {
     
@@ -18,7 +19,14 @@ struct HomeView: View {
         animation: .default)
     
     private var history: FetchedResults<FilterHistory>
-
+    
+    @State var showingRoverPickerSheet = false
+    @State var showingCameraPickerSheet = false
+    @State var showingCalendarPopUp = false
+    @State var selectedRowerName = "All"
+    @State var selectedCameraName = "FHAZ"
+    
+    // MARK: Body -
     var body: some View {
         NavigationView {
             ZStack(alignment:.bottomTrailing) {
@@ -46,7 +54,6 @@ struct HomeView: View {
                                 }
                                 .listStyle(.plain)
                                 .background(Color.backgroundOne)
-                                
                             }
                             Spacer()
                         }
@@ -56,7 +63,6 @@ struct HomeView: View {
                         ProgressView()
                     }
                 }
-                
                 floatyBtn
                     .offset(x: -10, y: -10)
             }
@@ -72,11 +78,12 @@ struct HomeView: View {
                 if object.object != nil {
                     callPhotosApi()
                 }
-               }
+            }
         }
     }
 }
 
+// MARK: Header View -
 extension HomeView {
     var headerView: some View {
         VStack {
@@ -92,70 +99,73 @@ extension HomeView {
                         .multilineTextAlignment(.leading)
                 }
                 Spacer()
-                if !homeViewModel.isShowingDatePicker {
-                    Button(action: {
-                        homeViewModel.isShowingDatePicker.toggle()
-                    }, label: {
-                        Image("Calendar")
-                            .resizable()
-                            .frame(width: 44, height: 44)
-                    })
+                Button (action: {
+                    showingCalendarPopUp.toggle()
+                }, label: {
+                    Image("Calendar")
+                        .resizable()
+                        .frame(width: 44, height: 44)
+                })
+                .customAlert("", isPresented: $showingCalendarPopUp) {
+                    calendarPicker
                 }
-                if homeViewModel.isShowingDatePicker {
-                               DatePicker("Select a date", selection: $selectedDate, displayedComponents: .date)
-                                   .datePickerStyle(CompactDatePickerStyle())
-                                   .labelsHidden()
-                                   .accentColor(Color.layerOne)
-                                   .padding()
-                                   .onChange(of: selectedDate) { _ in
-                                       print("changed")
-                                       homeViewModel.seletedDate = selectedDate.DateToString()
-                                       homeViewModel.photos = []
-                                       callPhotosApi()
-                                   }
+                .environment(\.customAlertConfiguration, .create { configuration in
+                    configuration.background = .blurEffect(.systemChromeMaterialDark)
+                    configuration.padding = EdgeInsets()
+                    configuration.alert = .create { alert in
+                        alert.background = .color(.backgroundOne)
+                        alert.cornerRadius = 30
+                        alert.padding = EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+                        alert.minWidth = 300
+                        alert.alignment = .leading
+                        alert.spacing = 10
+                    }
                 }
-            }
+            )}
+       
             HStack {
                 HStack {
                     HStack {
                         Image("Rover")
-                        Picker(selection: $homeViewModel.selectedRover, label: FilterButton(iconName: "Rover", text: homeViewModel.rover)) {
-                            ForEach(Rover.allCases, id: \.self) {
-                                Text($0.rawValue)
-                            }
-                        }
+                        Button(action: {
+                            showingRoverPickerSheet.toggle()
+                        }, label: {
+                            Text(selectedRowerName)
+                                .font(Font.custom("SFPro-Bold", size: 17))
+                                .frame(height: 22)
+                        })
+                        .sheet(isPresented: $showingRoverPickerSheet, content: {
+                            roverPicker
+                                .presentationDetents([.height(306)])
+                        })
+                        Spacer()
                     }
                     .foregroundColor(Color.layerOne)
                     .frame(width: 140, height: 38)
                     .background(Color.backgroundOne)
                     .accentColor(Color.layerOne)
                     .cornerRadius(4.0)
-
+                    
                     HStack {
                         Image("Camera")
-                        Picker(selection: $homeViewModel.selectedCamera, label: FilterButton(iconName: "Camera", text: homeViewModel.selectedCamera.rawValue)) {
-                            ForEach(homeViewModel.availableCameras, id: \.self) {
-                                Text($0.rawValue)
-                                    .font(Font.custom("SFPro-Bold", size: 17))
-                                    .frame(height: 22)
-                                
-                            }
-                        }
-                  
+                        Button(action: {
+                            showingCameraPickerSheet.toggle()
+                        }, label: {
+                            Text(selectedCameraName)
+                                .font(Font.custom("SFPro-Bold", size: 17))
+                                .frame(height: 22)
+                        })
+                        .sheet(isPresented: $showingCameraPickerSheet, content: {
+                            cameraPicker
+                                .presentationDetents([.height(306)])
+                        })
+                        Spacer()
                     }
-                    .foregroundColor(.backgroundOne)
+                    .foregroundColor(Color.layerOne)
                     .frame(width: 140, height: 38)
-                    .background(
-                        RoundedRectangle(cornerRadius: 4.0)
-                            .fill(Color.backgroundOne)
-                    )
-                    .foregroundColor(Color.backgroundOne)
+                    .background(Color.backgroundOne)
                     .accentColor(Color.layerOne)
-                    .onChange(of: homeViewModel.selectedCamera.rawValue) { _ in
-                                                homeViewModel.camera = homeViewModel.selectedCamera.rawValue
-                                                homeViewModel.rover = homeViewModel.selectedRover.rawValue
-                                                callPhotosApi()
-                   }
+                    .cornerRadius(4.0)
                 }
                 Spacer()
                 Button {
@@ -179,11 +189,9 @@ extension HomeView {
                 showAlert = false
             }))
         }
-  
     }
     
     func callPhotosApi()  {
-        
         let param = [
             "sol":"1000",
             "camera":homeViewModel.camera,
@@ -193,6 +201,23 @@ extension HomeView {
         homeViewModel.getPhotosList(type:Rover(rawValue: homeViewModel.rover) ?? .curiosity , param: param)
     }
     
+    private func addItem() {
+        let history = FilterHistory(context: viewContext)
+        history.id = UUID()
+        history.camera = homeViewModel.selectedCamera.rawValue
+        history.rover = homeViewModel.selectedRover.rawValue
+        history.date = selectedDate.DateToString()
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+}
+
+// MARK: Floating Button -
+extension HomeView {
     var floatyBtn: some View {
         NavigationLink {
             HistoryView()
@@ -209,20 +234,122 @@ extension HomeView {
             }
         }
     }
+}
+
+// MARK: Pickers -
+
+extension HomeView {
     
-    private func addItem() {
-        let history = FilterHistory(context: viewContext)
-        history.id = UUID()
-        history.camera = homeViewModel.selectedCamera.rawValue
-        history.rover = homeViewModel.selectedRover.rawValue
-        history.date = selectedDate.DateToString()
-        do {
-            try viewContext.save()
-        } catch {
-        
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+    // Rover Picker
+    var roverPicker: some View {
+        VStack {
+            HStack {
+                Button {
+                    showingRoverPickerSheet.toggle()
+                } label: {
+                    Image("Close")
+                }
+                Spacer()
+                Text(selectedRowerName)
+                    .font(Font.custom("SFPro-Bold", size: 22))
+                Spacer()
+                Button {
+                    callPhotosApi()
+                    selectedRowerName = homeViewModel.rover
+                    showingRoverPickerSheet.toggle()
+                } label: {
+                    Image("Tick")
+                }
+            }.padding([.leading, .trailing, .top], 20)
+            
+            Spacer()
+            
+            Picker(selection: $homeViewModel.selectedRover, label: FilterButton(iconName: "Rover", text: homeViewModel.rover)) {
+                ForEach(Rover.allCases, id: \.self) {
+                    Text($0.rawValue)
+                }
+            }
+            .onChange(of: homeViewModel.selectedRover.rawValue) { _ in
+                homeViewModel.rover = homeViewModel.selectedRover.rawValue
+            }
+            .pickerStyle(.wheel)
+            Spacer()
         }
-        
+    }
+    
+    // Camera Picker
+    var cameraPicker: some View {
+        VStack {
+            HStack {
+                Button {
+                    showingCameraPickerSheet.toggle()
+                } label: {
+                    Image("Close")
+                }
+                Spacer()
+                Text("Camera")
+                    .font(Font.custom("SFPro-Bold", size: 22))
+                
+                Spacer()
+                Button {
+                    callPhotosApi()
+                    selectedCameraName = homeViewModel.camera
+                    showingCameraPickerSheet.toggle()
+                    
+                } label: {
+                    Image("Tick")
+                }
+            }.padding([.leading, .trailing, .top], 20)
+            
+            Spacer()
+            
+            Picker(selection: $homeViewModel.selectedCamera, label: FilterButton(iconName: "Camera", text: homeViewModel.selectedCamera.rawValue)) {
+                ForEach(homeViewModel.availableCameras, id: \.self) {
+                    Text($0.rawValue)
+                }
+            }
+            .onChange(of: homeViewModel.selectedCamera.rawValue) { _ in
+                homeViewModel.camera = homeViewModel.selectedCamera.rawValue
+            }
+            .pickerStyle(.wheel)
+            Spacer()
+        }
+    }
+    
+    // Calendar Picker
+    var calendarPicker: some View {
+        VStack {
+            HStack {
+                Button {
+                    showingCalendarPopUp.toggle()
+                } label: {
+                    Image("Close")
+                }
+                Spacer()
+                Text("Date")
+                    .font(Font.custom("SFPro-Bold", size: 22))
+                
+                Spacer()
+                Button {
+                    callPhotosApi()
+                    showingCalendarPopUp.toggle()
+                    
+                } label: {
+                    Image("Tick")
+                }
+            }.padding([.leading, .trailing, .top], 20)
+            
+            Spacer()
+            
+            DatePicker("Select a date", selection: $selectedDate, displayedComponents: .date)
+                .datePickerStyle(WheelDatePickerStyle())
+                .labelsHidden()
+                .accentColor(Color.layerOne)
+                .padding()
+                .onChange(of: selectedDate) { _ in
+                    homeViewModel.seletedDate = selectedDate.DateToString()
+                }
+            Spacer()
+        }
     }
 }

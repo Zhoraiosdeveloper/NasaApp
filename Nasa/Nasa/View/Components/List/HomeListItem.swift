@@ -21,9 +21,7 @@ struct HomeListItem: View {
                 .shadow(color: Color.black.opacity(0.08), radius: 16, x: 0, y: 3)
             
             HStack {
-                
                 pictureInfoView(roverName: roverName, cameraName: cameraName, date: date)
-                
                 Spacer()
                 if !imageURL.isEmpty {
                     AsyncImage(url: URL(string: "\(imageURL)")!) { image in
@@ -43,7 +41,6 @@ struct HomeListItem: View {
 
 @ViewBuilder
 func pictureInfoView(roverName: String, cameraName: String, date: String) -> some View {
-    
     VStack(alignment: .leading, spacing: 10) {
         pictureDetailLineView(attribute: "Rover", info: roverName)
         pictureDetailLineView(attribute: "Camera", info: cameraName)

@@ -19,7 +19,8 @@ struct HistoryView: View {
     @State private var showingOptions = false
     @State var selectedFilter:FilterHistory?
     @Environment(\.dismiss) var dismiss
-    
+ 
+    // MARK: Body -
     var body: some View {
         VStack {
             headerView
@@ -78,8 +79,8 @@ struct HistoryView: View {
     }
 }
 
+// MARK: Header View -
 extension HistoryView {
-    
     var headerView: some View {
         VStack(alignment: .leading) {
             HStack {

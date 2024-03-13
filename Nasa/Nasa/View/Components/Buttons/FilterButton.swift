@@ -28,7 +28,6 @@ struct FilterButton: View {
                     .foregroundColor(.layerOne)
                 Spacer()
             }
-//            .frame(width: 140, height: 38)
         }
     }
 }
